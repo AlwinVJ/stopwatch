@@ -27,8 +27,6 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   String time = '00:00:00';
-  bool isvisible = true;
-  bool isnotvisible = false;
   bool startispressed = true;
   bool stopispressed = true;
   bool restartispressed = true;
@@ -145,7 +143,7 @@ class _HomeState extends State<Home> {
                       width: 80,
                       decoration: BoxDecoration(color: Colors.red.shade400),
                       child: const Text(
-                        'Reset',
+                        'Restart\nReset',
                         style: TextStyle(
                           color: Colors.white,
                           fontStyle: FontStyle.italic,
