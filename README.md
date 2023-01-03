@@ -1,7 +1,7 @@
 # stopwatch
 
-A new Flutter project.
-
+This is my second Flutter project.
+It's a stopwatch with basic three functions Start, Stop and Reset.
 ## Getting Started
 
 This project is a starting point for a Flutter application.
