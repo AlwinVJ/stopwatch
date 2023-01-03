@@ -33,48 +33,59 @@ class _HomeState extends State<Home> {
   var owatch = Stopwatch();
   final dur = const Duration(seconds: 1);
 
-  void startTimer(){
+  void startTimer() {
     Timer(dur, keeprunning);
   }
 
-  void keeprunning(){
-     if(owatch.isRunning){
-      startTimer();
-     }
-     setState(() {
-       time = '${owatch.elapsed.inHours.toString().padLeft(2,'0')}:${(owatch.elapsed.inMinutes%60).toString().padLeft(2,'0')}:${(owatch.elapsed.inSeconds%60).toString().padLeft(2,'0')}';
-     });
-     }
-    void startwatch(){
-      setState(() {
-        startispressed = false;
-        stopispressed = false;
-        restartispressed = false;
-      });
-      owatch.start();
+  void keeprunning() {
+    if (owatch.isRunning) {
       startTimer();
     }
-  void stopwatch(){
-     setState(() {
-        stopispressed = true;
-        restartispressed = false;
-      });
-      owatch.stop();
-  }
-  void resetwatch(){
     setState(() {
-        stopispressed = false;
-        restartispressed = true;
-        startispressed = true;
-        time = '00:00:00';
-      });
-      owatch.reset();
-      
+      time =
+          '${owatch.elapsed.inHours.toString().padLeft(2, '0')}:${(owatch.elapsed.inMinutes % 60).toString().padLeft(2, '0')}:${(owatch.elapsed.inSeconds % 60).toString().padLeft(2, '0')}';
+    });
   }
+
+  void startwatch() {
+    setState(() {
+      startispressed = false;
+      stopispressed = false;
+      restartispressed = false;
+    });
+    owatch.start();
+    startTimer();
+  }
+
+  void stopwatch() {
+    setState(() {
+      stopispressed = true;
+      restartispressed = false;
+    });
+    owatch.stop();
+  }
+
+  void resetwatch() {
+    setState(() {
+      stopispressed = false;
+      restartispressed = true;
+      startispressed = true;
+      time = '00:00:00';
+    });
+    owatch.reset();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+            centerTitle: true,
+            title: const Text(
+              'STOPWATCH',
+              style: TextStyle(color: Colors.white),
+            ),
+            backgroundColor: Colors.red.shade400),
         body: Stack(children: [
           Container(
             //child:Image.asset('images\back.jpg', height: double.infinity, fit: BoxFit.cover),
@@ -101,10 +112,11 @@ class _HomeState extends State<Home> {
               const SizedBox(
                 height: 50,
               ),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   InkWell(
-                    onTap: startispressed? startwatch : null,
+                    onTap: startispressed ? startwatch : null,
                     child: Container(
                       alignment: Alignment.center,
                       height: 40,
@@ -120,7 +132,7 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                   InkWell(
-                    onTap: stopispressed? null: stopwatch,
+                    onTap: stopispressed ? null : stopwatch,
                     child: Container(
                       alignment: Alignment.center,
                       height: 40,
@@ -136,7 +148,7 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                   InkWell(
-                    onTap: restartispressed? null : resetwatch,
+                    onTap: restartispressed ? null : resetwatch,
                     child: Container(
                       alignment: Alignment.center,
                       height: 40,
